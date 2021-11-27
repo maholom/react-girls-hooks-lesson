@@ -3,15 +3,17 @@ import { useGetJSON } from '../hooks/useGetJSON';
 import Student from './Student';
 
 const Students = (props) => {
-  const { data, loading } = useGetJSON('http://18.157.77.111/students');
+  const { data: students, loading } = useGetJSON(
+    'http://18.157.77.111/students'
+  );
 
   if (loading) {
-    return <div>Načítám...</div>;
+    return <div>Načítám seznam studentů</div>;
   }
 
   return (
     <ul>
-      {data.map((student) => {
+      {students.map((student) => {
         const isThisFemale = student.gender === 'F';
         const initials = `${student.firstName.charAt(
           0

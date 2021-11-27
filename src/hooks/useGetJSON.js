@@ -3,6 +3,11 @@ import { useState, useEffect } from 'react';
 export function useGetJSON(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [i, setI] = useState(0);
+
+  const refetch = () => {
+    setI(i + 1);
+  };
 
   useEffect(() => {
     fetch(url)
@@ -11,6 +16,6 @@ export function useGetJSON(url) {
         setData(json);
         setLoading(false);
       });
-  }, [url]);
-  return { data, loading };
+  }, [url, i]);
+  return { data, loading, refetch };
 }
